@@ -1,15 +1,30 @@
 package com.squareup.jasmine4k
 
-import std.io.*
 import java.util.List
 import java.util.ArrayList
-
-
+import com.squareup.Expect
+import com.squareup.ZExpect
 
 class ThingTests {
   fun testForTestEnvSetup() {
     describe("MyClass") {
       it("should have behavior A") {
+      }
+
+      context("other case") {
+        it("should have behavior B") {
+        }
+      }
+    }
+  }
+
+  fun testExpectationFailures() {
+    describe("MyClass") {
+      it("should have behavior A") {
+//        Expect.expect("abc").toEqual("def")
+//        expect("abc").toEqual("def")
+//        expect("abc").not.toEqual("def")
+//        expect(true).toBeFalse()
       }
 
       context("other case") {
@@ -64,23 +79,4 @@ class ThingTests {
       }
     }
   }
-}
-
-class User(var name:String?) {
-}
-
-fun String.width():Int {
-  return length();
-}
-
-fun main(args:Array<String>) {
-  //  ExpectGenerator.main(array("com.squareup"))
-
-  Env.currentEnv = Env()
-  ThingTests().testForTestEnvSetup()
-
-  var u = User(null)
-  u.name = "blah"
-  println(u.name?.width())
-  println(u.name)
 }

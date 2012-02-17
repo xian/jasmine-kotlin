@@ -12,7 +12,6 @@ class Env {
 
   public val childSpecs:List<Spec> = ArrayList()
 
-
   public fun before(body:()->Unit) {
     currentSuite?.befores?.add(body)
   }
@@ -102,17 +101,14 @@ fun after(body:()->Unit) {
 }
 
 fun describe(name:String, body:()->Unit) {
-  println("Describing ${name}...")
   Env.currentEnv?.describe(name, body)
 }
 
 fun context(name:String, body:()->Unit) {
-  println("Context ${name}...")
   Env.currentEnv?.context(name, body)
 }
 
 fun it(name:String, body:()->Unit) {
-  println("It ${name}.")
   Env.currentEnv?.it(name, body)
 }
 
@@ -127,3 +123,48 @@ fun subject(body:()->Unit) {
 fun <T> let(body:()->T):()->T {
   return body
 }
+
+//fun <T> expect(o:T):ObjectMatcher<T, *> {
+//  val clazz:Class<ObjectMatcher> = ObjectMatcher().getClass()
+//  return GreatExpectations.wrapped(clazz, null);
+//}
+
+//open class BaseMatcher<T>(val actual:T, val inverted:Boolean) {
+//  open val not:BaseMatcher<T> = this
+//  var descriptionOfActual:String? = null
+//  var descriptionOfExpected:String? = null
+//  var failureMessage:String? = null
+//}
+//
+//class ObjectMatcher<out T>(actual:T, inverted:Boolean):BaseMatcher<T>(actual, inverted) {
+//  override val not:ObjectMatcher<T> = this
+//  fun toEqual(expected:T):Boolean {
+//    return actual.equals(expected);
+//  }
+//
+//  fun toBe(expected:T):Boolean {
+//    return actual == expected;
+//  }
+//}
+
+//class BooleanMatcher<T:Boolean>(actual:T, inverted:Boolean):BaseMatcher<T>(actual, inverted) {
+//  fun toBeTrue():Boolean {
+//    return actual.equals(true);
+//  }
+//
+//  fun toBeFalse():Boolean {
+//    return actual.equals(false);
+//  }
+//}
+
+//fun <out T:Object> expect(t:T):ObjectMatcher<T> {
+//  println(javaClass<ObjectMatcher<T>>())
+//  return null
+//  return ObjectMatcher<T>(t, false)
+  //  return GreatExpectations.wrapped(javaClass<ObjectMatcher<T,M>>(), t);
+//}
+
+//fun <out T:Boolean> expect(t:T):BooleanMatcher<T> {
+//  return BooleanMatcher<T>(t, false)
+////  return GreatExpectations.wrapped(javaClass<ObjectMatcher<T,M>>(), t);
+//}
